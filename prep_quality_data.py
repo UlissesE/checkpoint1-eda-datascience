@@ -47,3 +47,7 @@ print(df.info())
 
 print("\n=== DATASET FINAL ===")
 print(df.shape)
+
+print("\n=== CRIANDO NOVO ARQUIVO CSV ===")
+df.to_csv("./data/processed/dataset_clean.csv", index=False)
+print("\nNovo arquivo criado em /data/processed/")
