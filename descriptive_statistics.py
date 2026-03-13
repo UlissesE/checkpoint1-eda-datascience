@@ -22,6 +22,21 @@ print("\nModa:\n", df.mode())
 print("\nVariância Amostral:\n", df.var(ddof=1))
 print("\nDP amostral:\n", df.std(ddof=1))
 
+print(
+    """
+    ==========================================
+         Correlação entre as variáveis
+    ==========================================
+    """
+)
+
+correlacao = df['ai_adoption_rate'].corr(df['productivity_change_percent'])
+corr2 = data['task_automation_rate'].corr(data['time_saved_per_week'])
+
+print(f"Correlação de Pearson: {correlacao:.3f}")
+print(f"\nCorrelação entre automação e tempo economizado: {corr2:.3f}")
+
+
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
 # Ai Adoption Rate Graphics
@@ -35,6 +50,36 @@ axes[1].hist(df['productivity_change_percent'], bins="auto", color="orange", alp
 axes[1].set_title("Histograma: Productivity Change")
 axes[1].set_xlabel("%")
 axes[1].set_ylabel("Frequência")
+
+fig, axes = plt.subplots(1, 2, figsize=(12,4))
+
+# Scatter 1
+axes[0].scatter(
+    df['ai_adoption_rate'],
+    df['productivity_change_percent'],
+    alpha=0.7,
+    color="purple"
+)
+axes[0].set_title("AI Adoption Rate vs Productivity Change")
+axes[0].set_xlabel("AI Adoption Rate (%)")
+axes[0].set_ylabel("Productivity Change (%)")
+axes[0].grid(True)
+
+# Scatter 2
+axes[1].scatter(
+    data['task_automation_rate'],
+    data['time_saved_per_week'],
+    color="green",
+    alpha=0.7
+)
+axes[1].set_title("Task Automation Rate vs Time Saved per Week")
+axes[1].set_xlabel("Task Automation Rate (%)")
+axes[1].set_ylabel("Time Saved per Week (hours)")
+axes[1].grid(True)
+
+plt.tight_layout()
+plt.show()
+
 
 plt.tight_layout()
 plt.show()
